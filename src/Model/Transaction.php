@@ -184,6 +184,14 @@ class Transaction
      */
     protected $token;
 
+
+    /**
+     * @var string
+     */
+    protected $_rawResponse;
+
+
+
     /**
      * @return integer
      */
@@ -869,10 +877,26 @@ class Transaction
     }
 
     /**
-     * @param $params
+     * @return string
+     */
+    public function getRawResponse() {
+        return $this->_rawResponse;
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setRawResponse($value) {
+        $this->_rawResponse = $value;
+    }
+
+
+    /**
+     * @param array $params
+     * @param array|null $params
      * @return Transaction
      */
-    public static function fromArray($params)
+    public static function fromArray($params, $response = null)
     {
         $transaction = new Transaction();
 
@@ -888,7 +912,7 @@ class Transaction
         if (isset($params['InvoiceId'])) {
             $transaction->setInvoiceId($params['InvoiceId']);
         }
-        
+
         if (isset($params['AccountId'])) {
             $transaction->setAccountId(['AccountId']);
         }
@@ -995,6 +1019,10 @@ class Transaction
 
         if (isset($params['Token'])) {
             $transaction->setToken($params['Token']);
+        }
+
+        if ($response != null) {
+            $transaction->setRawResponse(json_encode($response));
         }
 
         return $transaction;

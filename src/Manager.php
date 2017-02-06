@@ -168,11 +168,12 @@ class Manager
     /**
      * @param $transactionId
      * @param $token
+     * @param $withResponseDump
      * @return Model\Transaction
      * @throws Exception\PaymentException
      * @throws Exception\RequestException
      */
-    public function confirm3DS($transactionId, $token)
+    public function confirm3DS($transactionId, $token, $withResponseDump = false)
     {
         $response = $this->sendRequest('/payments/cards/post3ds', [
             'TransactionId' => $transactionId,
@@ -187,7 +188,7 @@ class Manager
             throw new Exception\PaymentException($response);
         }
 
-        return Model\Transaction::fromArray($response['Model']);
+        return $withResponseDump ? Model\Transaction::fromArray($response['Model'], $response) : Model\Transaction::fromArray($response['Model']);
     }
 
     /**
