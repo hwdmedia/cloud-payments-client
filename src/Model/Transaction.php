@@ -202,13 +202,10 @@ class Transaction
 
     /**
      * @param integer $value
-     * @return $this
      */
     public function setId($value)
     {
         $this->id = $value;
-
-        return $this;
     }
 
     /**
@@ -221,13 +218,10 @@ class Transaction
 
     /**
      * @param float $value
-     * @return $this
      */
     public function setAmount($value)
     {
         $this->amount = $value;
-
-        return $this;
     }
 
     /**
@@ -240,13 +234,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setCurrency($value)
     {
         $this->currency = $value;
-
-        return $this;
     }
 
     /**
@@ -259,13 +250,10 @@ class Transaction
 
     /**
      * @param integer $value
-     * @return $this
      */
     public function setCurrencyCode($value)
     {
         $this->currencyCode = $value;
-
-        return $this;
     }
 
     /**
@@ -278,13 +266,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setInvoiceId($value)
     {
         $this->invoiceId = $value;
-
-        return $this;
     }
 
     /**
@@ -297,13 +282,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setAccountId($value)
     {
         $this->accountId = $value;
-
-        return $this;
     }
 
     /**
@@ -316,13 +298,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setEmail($value)
     {
         $this->email = $value;
-
-        return $this;
     }
 
     /**
@@ -335,13 +314,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setDescription($value)
     {
         $this->description = $value;
-
-        return $this;
     }
 
     /**
@@ -354,13 +330,10 @@ class Transaction
 
     /**
      * @param array $value
-     * @return $this
      */
     public function setData($value)
     {
         $this->data = $value;
-
-        return $this;
     }
 
     /**
@@ -373,13 +346,10 @@ class Transaction
 
     /**
      * @param \DateTime $value
-     * @return $this
      */
     public function setCreatedAt($value)
     {
         $this->createdAt = $value;
-
-        return $this;
     }
 
     /**
@@ -392,13 +362,10 @@ class Transaction
 
     /**
      * @param \DateTime $value
-     * @return $this
      */
     public function setAuthorizedAt($value)
     {
         $this->authorizedAt = $value;
-
-        return $this;
     }
 
     /**
@@ -411,13 +378,10 @@ class Transaction
 
     /**
      * @param \DateTime $value
-     * @return $this
      */
     public function setConfirmedAt($value)
     {
         $this->confirmedAt = $value;
-
-        return $this;
     }
 
     /**
@@ -430,13 +394,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setAuthCode($value)
     {
         $this->authCode = $value;
-
-        return $this;
     }
 
     /**
@@ -449,13 +410,10 @@ class Transaction
 
     /**
      * @param boolean $value
-     * @return $this
      */
     public function setTestMode($value)
     {
         $this->testMode = $value;
-
-        return $this;
     }
 
     /**
@@ -468,13 +426,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setIpAddress($value)
     {
         $this->ipAddress = $value;
-
-        return $this;
     }
 
     /**
@@ -487,13 +442,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setIpCountry($value)
     {
         $this->ipCountry = $value;
-
-        return $this;
     }
 
     /**
@@ -506,13 +458,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setIpCity($value)
     {
         $this->ipCity = $value;
-
-        return $this;
     }
 
     /**
@@ -525,13 +474,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setIpRegion($value)
     {
         $this->ipRegion = $value;
-
-        return $this;
     }
 
     /**
@@ -544,13 +490,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setIpDistrict($value)
     {
         $this->ipDistrict = $value;
-
-        return $this;
     }
 
     /**
@@ -563,13 +506,10 @@ class Transaction
 
     /**
      * @param float $value
-     * @return $this
      */
     public function setIpLatitude($value)
     {
         $this->ipLatitude = $value;
-
-        return $this;
     }
 
     /**
@@ -582,13 +522,10 @@ class Transaction
 
     /**
      * @param float $value
-     * @return $this
      */
     public function setIpLongitude($value)
     {
         $this->ipLongitude = $value;
-
-        return $this;
     }
 
     /**
@@ -601,13 +538,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setCardFirstSix($value)
     {
         $this->cardFirstSix = $value;
-
-        return $this;
     }
 
     /**
@@ -620,13 +554,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setCardLastFour($value)
     {
         $this->cardLastFour = $value;
-
-        return $this;
     }
 
     /**
@@ -639,13 +570,10 @@ class Transaction
 
     /**
      * @param integer $value
-     * @return $this
      */
     public function setCardExpiredMonth($value)
     {
         $this->cardExpiredMonth = $value;
-
-        return $this;
     }
 
     /**
@@ -658,13 +586,10 @@ class Transaction
 
     /**
      * @param integer $value
-     * @return $this
      */
     public function setCardExpiredYear($value)
     {
         $this->cardExpiredYear = $value;
-
-        return $this;
     }
 
     /**
@@ -677,13 +602,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setCardType($value)
     {
         $this->cardType = $value;
-
-        return $this;
     }
 
     /**
@@ -696,13 +618,10 @@ class Transaction
 
     /**
      * @param integer $value
-     * @return $this
      */
     public function setCardTypeCode($value)
     {
         $this->cardTypeCode = $value;
-
-        return $this;
     }
 
     /**
@@ -715,13 +634,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setIssuer($value)
     {
         $this->issuer = $value;
-
-        return $this;
     }
 
     /**
@@ -734,13 +650,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setIssuerBankCountry($value)
     {
         $this->issuerBankCountry = $value;
-
-        return $this;
     }
 
     /**
@@ -753,13 +666,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setStatus($value)
     {
         $this->status = $value;
-
-        return $this;
     }
 
     /**
@@ -772,13 +682,10 @@ class Transaction
 
     /**
      * @param integer $value
-     * @return $this
      */
     public function setStatusCode($value)
     {
         $this->statusCode = $value;
-
-        return $this;
     }
 
     /**
@@ -791,13 +698,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setReason($value)
     {
         $this->reason = $value;
-
-        return $this;
     }
 
     /**
@@ -810,13 +714,10 @@ class Transaction
 
     /**
      * @param integer $value
-     * @return $this
      */
     public function setReasonCode($value)
     {
         $this->reasonCode = $value;
-
-        return $this;
     }
 
     /**
@@ -829,13 +730,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setCardHolderMessage($value)
     {
         $this->cardHolderMessage = $value;
-
-        return $this;
     }
 
     /**
@@ -848,13 +746,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setCardHolderName($value)
     {
         $this->cardHolderName = $value;
-
-        return $this;
     }
 
     /**
@@ -867,13 +762,10 @@ class Transaction
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setToken($value)
     {
         $this->token = $value;
-
-        return $this;
     }
 
     /**

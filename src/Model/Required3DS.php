@@ -48,13 +48,10 @@ class Required3DS
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setToken($value)
     {
         $this->token = $value;
-
-        return $this;
     }
 
     /**
@@ -67,13 +64,10 @@ class Required3DS
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setUrl($value)
     {
         $this->url = $value;
-
-        return $this;
     }
 
     /**
