@@ -2,8 +2,9 @@
 
 namespace CloudPayments;
 
-class Manager
-{
+use CloudPayments\Exception\RequestException;
+
+class Manager {
     /**
      * @var string
      */
@@ -28,8 +29,7 @@ class Manager
      * @param $publicKey
      * @param $privateKey
      */
-    public function __construct($publicKey, $privateKey)
-    {
+    public function __construct($publicKey, $privateKey) {
         $this->publicKey = $publicKey;
         $this->privateKey = $privateKey;
     }
@@ -38,9 +38,9 @@ class Manager
      * @param string $endpoint
      * @param array $params
      * @return array
+     * @throws RequestException
      */
-    protected function sendRequest($endpoint, array $params = [])
-    {
+    protected function sendRequest($endpoint, array $params = []) {
         $params['CultureName'] = $this->locale;
 
         $curl = curl_init();
@@ -55,33 +55,35 @@ class Manager
 
         $result = curl_exec($curl);
 
-        curl_close($curl);
-
+        if (curl_errno($curl)) {
+            throw new Exception\RequestException(curl_error($curl));
+        }
         return (array)json_decode($result, true);
     }
 
     /**
      * @return string
      */
-    public function getLocale()
-    {
+    public function getLocale() {
         return $this->locale;
     }
 
     /**
      * @param string $locale
      */
-    public function setLocale($locale)
-    {
+    public function setLocale($locale) {
         $this->locale = $locale;
     }
 
     /**
      * @throws Exception\RequestException
      */
-    public function test()
-    {
-        $response = $this->sendRequest('/test');
+    public function test() {
+        try {
+            $response = $this->sendRequest('/test');
+        } catch (RequestException $e) {
+            throw $e;
+        }
         if (!$response['Success']) {
             throw new Exception\RequestException($response);
         }
@@ -99,8 +101,7 @@ class Manager
      * @throws Exception\PaymentException
      * @throws Exception\RequestException
      */
-    public function chargeCard($amount, $currency, $ipAddress, $cardHolderName, $cryptogram, $params = [], $requireConfirmation = false)
-    {
+    public function chargeCard($amount, $currency, $ipAddress, $cardHolderName, $cryptogram, $params = [], $requireConfirmation = false) {
         $endpoint = $requireConfirmation ? '/payments/cards/auth' : '/payments/cards/charge';
         $defaultParams = [
             'Amount' => $amount,
@@ -110,7 +111,11 @@ class Manager
             'CardCryptogramPacket' => $cryptogram
         ];
 
-        $response = $this->sendRequest($endpoint, array_merge($defaultParams, $params));
+        try {
+            $response = $this->sendRequest($endpoint, array_merge($defaultParams, $params));
+        } catch (RequestException $e) {
+            throw $e;
+        }
 
         if ($response['Success']) {
             return Model\Transaction::fromArray($response['Model']);
@@ -138,8 +143,7 @@ class Manager
      * @throws Exception\PaymentException
      * @throws Exception\RequestException
      */
-    public function chargeToken($amount, $currency, $accountId, $token, $params = [], $requireConfirmation = false)
-    {
+    public function chargeToken($amount, $currency, $accountId, $token, $params = [], $requireConfirmation = false) {
         $endpoint = $requireConfirmation ? '/payments/tokens/auth' : '/payments/tokens/charge';
         $defaultParams = [
             'Amount' => $amount,
@@ -148,7 +152,11 @@ class Manager
             'Token' => $token,
         ];
 
-        $response = $this->sendRequest($endpoint, array_merge($defaultParams, $params));
+        try {
+            $response = $this->sendRequest($endpoint, array_merge($defaultParams, $params));
+        } catch (RequestException $e) {
+            throw $e;
+        }
 
         if ($response['Success']) {
             return Model\Transaction::fromArray($response['Model']);
@@ -173,12 +181,15 @@ class Manager
      * @throws Exception\PaymentException
      * @throws Exception\RequestException
      */
-    public function confirm3DS($transactionId, $token, $withResponseDump = false)
-    {
-        $response = $this->sendRequest('/payments/cards/post3ds', [
-            'TransactionId' => $transactionId,
-            'PaRes' => $token
-        ]);
+    public function confirm3DS($transactionId, $token, $withResponseDump = false) {
+        try {
+            $response = $this->sendRequest('/payments/cards/post3ds', [
+                'TransactionId' => $transactionId,
+                'PaRes' => $token
+            ]);
+        } catch (RequestException $e) {
+            throw $e;
+        }
 
         if ($response['Message']) {
             throw new Exception\RequestException($response);
@@ -196,12 +207,15 @@ class Manager
      * @param $amount
      * @throws Exception\RequestException
      */
-    public function confirmPayment($transactionId, $amount)
-    {
-        $response = $this->sendRequest('/payments/confirm', [
-            'TransactionId' => $transactionId,
-            'Amount' => $amount
-        ]);
+    public function confirmPayment($transactionId, $amount) {
+        try {
+            $response = $this->sendRequest('/payments/confirm', [
+                'TransactionId' => $transactionId,
+                'Amount' => $amount
+            ]);
+        } catch (RequestException $e) {
+            throw $e;
+        }
 
         if (!$response['Success']) {
             throw new Exception\RequestException($response);
@@ -212,11 +226,14 @@ class Manager
      * @param $transactionId
      * @throws Exception\RequestException
      */
-    public function voidPayment($transactionId)
-    {
-        $response = $this->sendRequest('/payments/void', [
-            'TransactionId' => $transactionId
-        ]);
+    public function voidPayment($transactionId) {
+        try {
+            $response = $this->sendRequest('/payments/void', [
+                'TransactionId' => $transactionId
+            ]);
+        } catch (RequestException $e) {
+            throw $e;
+        }
 
         if (!$response['Success']) {
             throw new Exception\RequestException($response);
@@ -228,12 +245,15 @@ class Manager
      * @param $amount
      * @throws Exception\RequestException
      */
-    public function refundPayment($transactionId, $amount)
-    {
-        $response = $this->sendRequest('/payments/refund', [
-            'TransactionId' => $transactionId,
-            'Amount' => $amount
-        ]);
+    public function refundPayment($transactionId, $amount) {
+        try {
+            $response = $this->sendRequest('/payments/refund', [
+                'TransactionId' => $transactionId,
+                'Amount' => $amount
+            ]);
+        } catch (RequestException $e) {
+            throw $e;
+        }
 
         if (!$response['Success']) {
             throw new Exception\RequestException($response);
@@ -245,11 +265,14 @@ class Manager
      * @return Model\Transaction
      * @throws Exception\RequestException
      */
-    public function findPayment($invoiceId)
-    {
-        $response = $this->sendRequest('/payments/find', [
-            'InvoiceId' => $invoiceId
-        ]);
+    public function findPayment($invoiceId) {
+        try {
+            $response = $this->sendRequest('/payments/find', [
+                'InvoiceId' => $invoiceId
+            ]);
+        } catch (RequestException $e) {
+            throw $e;
+        }
 
         if (!$response['Success']) {
             throw new Exception\RequestException($response);
@@ -261,8 +284,7 @@ class Manager
     /**
      * @return string
      */
-    public function getUrl()
-    {
+    public function getUrl() {
         return $this->url;
     }
 
@@ -270,8 +292,7 @@ class Manager
      * @param string $value
      * @return $this
      */
-    public function setUrl($value)
-    {
+    public function setUrl($value) {
         $this->url = $value;
 
         return $this;
@@ -280,8 +301,7 @@ class Manager
     /**
      * @return string
      */
-    public function getPublicKey()
-    {
+    public function getPublicKey() {
         return $this->publicKey;
     }
 
@@ -289,8 +309,7 @@ class Manager
      * @param string $value
      * @return $this
      */
-    public function setPublicKey($value)
-    {
+    public function setPublicKey($value) {
         $this->publicKey = $value;
 
         return $this;
@@ -299,8 +318,7 @@ class Manager
     /**
      * @return string
      */
-    public function getPrivateKey()
-    {
+    public function getPrivateKey() {
         return $this->privateKey;
     }
 
@@ -308,8 +326,7 @@ class Manager
      * @param string $value
      * @return $this
      */
-    public function setPrivateKey($value)
-    {
+    public function setPrivateKey($value) {
         $this->privateKey = $value;
 
         return $this;
